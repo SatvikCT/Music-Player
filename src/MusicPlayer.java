@@ -113,7 +113,6 @@ public class MusicPlayer{
     }
 
     void adjustDateTop(Song song) {
-
         List<Song> currentDateList = dateTop.get(currentDate);
         adjuster(song, currentDateList);
     }

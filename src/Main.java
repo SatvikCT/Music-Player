@@ -1,8 +1,17 @@
 import java.time.LocalDate;
 
 public class Main {
+
     public static void main(String[] args) {
         MusicPlayer player = new MusicPlayer();
+
+        //player.addSong - O(1)
+        //player.playSong - O(1)
+        //player.getAllTimeTopSongs - O(1)
+        //player.getArtistSongs - O(N) -- loop iteration over all artist songs
+        //player.getTopSongsByDate - O(1)
+        //player.getTopSongsByArtist - O(1)
+        //player.nextDay - O(N) -- for every song, current counter must be changed
 
         player.addSong("Numb", "Linkin Park");
         player.addSong("In the End", "Linkin Park");
