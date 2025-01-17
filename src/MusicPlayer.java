@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.util.*;
 
-public class MusicPlayer {
+public class MusicPlayer{
 
     HashMap<LocalDate, List<Song>> dateTop = new HashMap<>();
     HashMap<String, List<Song>> artistTop = new HashMap<>();
@@ -33,6 +33,7 @@ public class MusicPlayer {
     }
 
     void playSong(String title) {
+
          Song song = allSongs.get(title);
          song.play();
          if(song.total > allTop.get(9).total){
@@ -86,9 +87,7 @@ public class MusicPlayer {
         }
     }
 
-    void adjustDateTop(Song song) {
-
-        List<Song> currentDateList = dateTop.get(currentDate);
+    void adjuster(Song song, List<Song> currentDateList) {
         currentDateList.remove(song);
 
         int idx = currentDateList.size() - 1;
@@ -106,33 +105,17 @@ public class MusicPlayer {
     void adjustArtistTop(Song song) {
 
         List<Song> currentArtistList = artistTop.get(song.artist);
-        currentArtistList.remove(song);
-
-        int idx = currentArtistList.size() - 1;
-        while (idx >= 0 && song.current > currentArtistList.get(idx).total) {
-            idx--;
-        }
-
-        currentArtistList.add(idx + 1, song);
-
-        if (currentArtistList.size() > 10) {
-            currentArtistList.remove(10);
-        }
+        adjuster(song, currentArtistList);
     }
 
     void adjustAllTops(Song song) {
-        allTop.remove(song);
+        adjuster(song, allTop);
+    }
 
-        int idx = allTop.size() - 1;
-        while (idx >= 0 && song.current > allTop.get(idx).total) {
-            idx--;
-        }
+    void adjustDateTop(Song song) {
 
-        allTop.add(idx + 1, song);
-
-        if (allTop.size() > 10) {
-            allTop.remove(10);
-        }
+        List<Song> currentDateList = dateTop.get(currentDate);
+        adjuster(song, currentDateList);
     }
 
 }
